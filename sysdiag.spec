@@ -41,13 +41,11 @@ informacji o urz±dzeniach z sysfs pod Linuksem 2.5+.
 %configure
 
 %{__make}
-#	INCLUDES= \
-#	LDADD=-lsysfs
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} -C src install \
+%{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
@@ -56,5 +54,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README docs/sysdiag.txt
-%attr(755,root,root) %{_bindir}/*
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/sysdiag.conf
+%attr(755,root,root) %{_bindir}/*
+%{_mandir}/man1/%{name}.1*
