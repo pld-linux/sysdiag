@@ -1,0 +1,12 @@
+diff -burN sysdiag-v0_2_0.orig/src/sysdiag.h sysdiag-v0_2_0/src/sysdiag.h
+--- sysdiag-v0_2_0.orig/src/sysdiag.h	2004-02-24 14:54:00.395408040 +0100
++++ sysdiag-v0_2_0/src/sysdiag.h	2004-02-24 15:03:51.725512200 +0100
+@@ -79,7 +79,7 @@
+ 
+ #define CMD_OPTIONS "B:b:c:diLlRr:psthxv?"
+ 
+-#define CONF_FILE "/usr/local/share/sysdiag.conf"
++#define CONF_FILE "/etc/sysdiag.conf"
+ 
+ TDB_CONTEXT *sysdiag_db;
+ 
