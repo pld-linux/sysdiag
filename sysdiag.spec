@@ -11,6 +11,7 @@ Source0:	http://dl.sourceforge.net/linux-diag/%{name}-v%{fver}.tar.gz
 Patch0:		%{name}-gcc33_fixes.patch
 Patch1:		%{name}-paths.patch
 URL:		http://linux-diag.sourceforge.net/Sysdiag.html
+BuildRequires:	gdbm-devel
 #BuildRequires:	sysfsutils-devel = 0.1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
