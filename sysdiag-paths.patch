@@ -10,3 +10,45 @@ diff -burN sysdiag-v0_2_0.orig/src/sysdiag.h sysdiag-v0_2_0/src/sysdiag.h
  
  TDB_CONTEXT *sysdiag_db;
  
+--- sysdiag-v0_2_0/src/sysdiag.conf.orig	2004-01-02 06:22:10.000000000 +0100
++++ sysdiag-v0_2_0/src/sysdiag.conf	2004-02-25 22:09:31.368282992 +0100
+@@ -10,7 +10,7 @@
+ 
+ EVLOGVIEW=/sbin/evlview -b -S "%time% %host% %facility% %severity% %event_type% %data%" --datefmt "%A %B %d %l:%M:%S %p"  | grep -wi <dev>
+ 
+-DB_FILE=/usr/local/share/sysdiag.tdb
++DB_FILE=/var/lib/misc/sysdiag.tdb
+ 
+ [net]
+ INQ=ethtool -i <dev>
+--- sysdiag-v0_2_0/docs/sysdiag.1.orig	2004-01-02 06:23:43.000000000 +0100
++++ sysdiag-v0_2_0/docs/sysdiag.1	2004-02-25 21:45:58.802025704 +0100
+@@ -54,11 +54,11 @@
+ 
+ .TP
+ .B -R 
+-Reloads the \fBsysdiag\fR database (/usr/local/share/sysdiag.tdb) with the configuration settings, device information for \fBsysdiag\fR\&.
++Reloads the \fBsysdiag\fR database (/var/lib/misc/sysdiag.tdb) with the configuration settings, device information for \fBsysdiag\fR\&.
+ 
+ .TP
+ .B -d 
+-Shows the diagnostic capabilities of \fBsysdiag\fR. Shows the list of commands that the \fBsysdiag\fR will use to run diagnostics on various devices. The diagnostic capabitlities are defined by class of device. The current support is for net class and scsi_device class of devices. /usr/local/share/sysdiag.conf file has the setting for the diagnostics tool \fBsysdiag\fR uses to run the diagnostics. Users can modify the configuration file to specify different tools to use for running diagnostics on net and scsi_device class of devices\&.
++Shows the diagnostic capabilities of \fBsysdiag\fR. Shows the list of commands that the \fBsysdiag\fR will use to run diagnostics on various devices. The diagnostic capabitlities are defined by class of device. The current support is for net class and scsi_device class of devices. /etc/sysdiag.conf file has the setting for the diagnostics tool \fBsysdiag\fR uses to run the diagnostics. Users can modify the configuration file to specify different tools to use for running diagnostics on net and scsi_device class of devices\&.
+ 
+ .TP
+ .B -i [device_name | class_name]
+@@ -125,13 +125,9 @@
+ .SH "FILES"
+ 
+ .TP
+-\fI/usr/local/share/sysdiag.tdb\fR
++\fI/var/lib/misc/sysdiag.tdb\fR
+ Database containing configuration settings for \fBsysdiag\fR, device information used by \fBsysdiag\fR\&.
+ 
+-.TP
+-\fI/usr/local/share\fR
+-Directory containing configuration and temporary files.\&.
+-
+ .SH "MAILING LIST"
+ 
+ .PP
