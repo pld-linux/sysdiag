@@ -1,0 +1,70 @@
+--- sysdiag-v0_2_0/src/Makefile.am.orig	2004-01-02 06:22:10.000000000 +0100
++++ sysdiag-v0_2_0/src/Makefile.am	2004-02-25 21:42:53.380214104 +0100
+@@ -4,6 +4,6 @@
+ sysdiag_SOURCES = sysdiag.c syslist.c sysparse.c syslog.c sysdiag.h sysdb.c
+ data_DATA = $(conf_file)
+ 
+-INCLUDES = -I../lib -I../tdb
+-LDADD = ../lib/libsysfs.a ../tdb/libtdb.a
++INCLUDES = -I../tdb
++LDADD = -lsysfs -ltdb
+ 
+--- sysdiag-v0_2_0/Makefile.am.orig	2004-01-02 06:34:22.000000000 +0100
++++ sysdiag-v0_2_0/Makefile.am	2004-02-25 21:40:54.868230664 +0100
+@@ -1,3 +1,3 @@
+ # EXTRA_DIST = docs
+-SUBDIRS = lib tdb src docs
++SUBDIRS = src docs
+ 
+--- sysdiag-v0_2_0/configure.ac.orig	2004-01-02 06:34:22.000000000 +0100
++++ sysdiag-v0_2_0/configure.ac	2004-02-25 21:40:44.207851288 +0100
+@@ -10,7 +10,6 @@
+ AC_PROG_CC
+ AC_PROG_RANLIB
+ 
+-AC_CHECK_LIB([gdbm], [gdbm_open], , exit)
+ 
+ 
+ AH_TEMPLATE([HAVE_EVLVIEW],[need to check if evlview is installed])
+--- sysdiag-v0_2_0/src/sysdb.c.orig	2004-01-02 06:54:00.000000000 +0100
++++ sysdiag-v0_2_0/src/sysdb.c	2004-02-25 22:09:00.765935256 +0100
+@@ -434,16 +434,16 @@
+ int load_sysdiag_db()
+ {
+ 
+-	if (load_default(SYSFS_BUS_DIR, SYSDIAG_BUS_STR) != 0) {
++	if (load_default(SYSFS_BUS_NAME, SYSDIAG_BUS_STR) != 0) {
+ 		fprintf(stderr, "loading bus information failed !!\n");
+ 		return -1;
+ 	}
+-	if (load_default(SYSFS_CLASS_DIR, SYSDIAG_CLASS_STR) != 0) {
++	if (load_default(SYSFS_CLASS_NAME, SYSDIAG_CLASS_STR) != 0) {
+ 		fprintf(stderr, "loading class information failed !!\n");
+ 		return -1;
+ 	}
+ 	
+-	if (load_default(SYSFS_DEVICES_DIR, SYSFS_DEVICES_NAME) != 0) {
++	if (load_default(SYSFS_DEVICES_NAME, SYSFS_DEVICES_NAME) != 0) {
+ 		fprintf(stderr, "loading root device information failed !!\n");
+ 		return -1;
+ 	}
+--- sysdiag-v0_2_0/src/sysdiag.c.orig	2004-01-02 06:22:10.000000000 +0100
++++ sysdiag-v0_2_0/src/sysdiag.c	2004-02-25 22:09:11.664278456 +0100
+@@ -192,7 +192,7 @@
+ 	struct sysfs_directory *mydir = NULL;
+ 	char *dev_num = NULL;
+ 
+-	if ((classdev = sysfs_open_class_device_by_name("scsi_host", 
++	if ((classdev = sysfs_open_class_device("scsi_host", 
+ 					device)) == NULL) {
+ 		fprintf(stdout, "error opening class device %s\n", device);
+ 		return NULL;
+@@ -440,7 +440,7 @@
+ 		}
+ 	}
+ 	else {
+-		if ((classdev = sysfs_open_class_device_by_name("scsi_host", 
++		if ((classdev = sysfs_open_class_device("scsi_host", 
+ 						DEVICE_NAME)) == NULL) {
+ 			fprintf(stdout, "error opening class device %s\n", 
+ 					DEVICE_NAME);
