@@ -32,6 +32,18 @@ zdarzeniach zwi±zanych z tym urz±dzeniem. sysdiag wykorzystuje
 libsysfs - bibliotekê dostarczaj±c± zbiór API do uzyskiwania
 informacji o urz±dzeniach z sysfs pod Linuksem 2.5+.
 
+%package devel
+Summary:	Header files for sysdiag
+Summary(pl):	Pliki nag³ówkowe sysdiag
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description devel
+Header files for sysdiag.
+
+%description devel -l pl
+Pliki nag³ówkowe sysdiag.
+
 %prep
 %setup -q -n %{name}-v%{fver}
 %patch0 -p1
@@ -57,3 +69,8 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/sysdiag.conf
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/%{name}.1*
+
+%files devel
+%defattr(644,root,root,755)
+%{_includedir}/*.h
+%{_libdir}/*.a
