@@ -3,16 +3,19 @@ Summary(pl):	Narzêdzie diagnostyczne dzia³aj±ce z linii poleceñ
 Name:		sysdiag
 Version:	0.2.0
 %define	fver	%(echo %{version} | tr . _)
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/linux-diag/%{name}-v%{fver}.tar.gz
 # Source0-md5:	5527e42a8bece0bcfc10b2ef70a62cd2
 Patch0:		%{name}-gcc33_fixes.patch
 Patch1:		%{name}-paths.patch
+Patch2:		%{name}-system-libs.patch
 URL:		http://linux-diag.sourceforge.net/Sysdiag.html
-BuildRequires:	gdbm-devel
-#BuildRequires:	sysfsutils-devel = 0.1.0
+BuildRequires:	autoconf >= 2.50
+BuildRequires:	automake
+BuildRequires:	sysfsutils-devel >= 0.4.0
+BuildRequires:	tdb-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_datadir	%{_sysconfdir}
@@ -33,24 +36,17 @@ zdarzeniach zwi±zanych z tym urz±dzeniem. sysdiag wykorzystuje
 libsysfs - bibliotekê dostarczaj±c± zbiór API do uzyskiwania
 informacji o urz±dzeniach z sysfs pod Linuksem 2.5+.
 
-%package devel
-Summary:	Header files for sysdiag
-Summary(pl):	Pliki nag³ówkowe sysdiag
-Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
-
-%description devel
-Header files for sysdiag.
-
-%description devel -l pl
-Pliki nag³ówkowe sysdiag.
-
 %prep
 %setup -q -n %{name}-v%{fver}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure
 
 %{__make}
@@ -68,10 +64,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README docs/sysdiag.txt
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/sysdiag.conf
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/sysdiag
 %{_mandir}/man1/%{name}.1*
-
-%files devel
-%defattr(644,root,root,755)
-%{_includedir}/*.h
-%{_libdir}/*.a
