@@ -1,13 +1,15 @@
 Summary:	Command line diagnostics
 Summary(pl):	Narzêdzie diagnostyczne dzia³aj±ce z linii poleceñ
 Name:		sysdiag
-Version:	0.1.0
+Version:	0.2.0
 %define	fver	%(echo %{version} | tr . _)
-Release:	1
+Release:	0.1
 License:	GPL
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/linux-diag/%{name}-v%{fver}.tar.gz
-# Source0-md5:	6f8ae797f4215647cee90a08607c332c
+# Source0-md5:	5527e42a8bece0bcfc10b2ef70a62cd2
+Patch0:		%{name}-gcc33_fixes.patch
+Patch1:		%{name}-paths.patch
 URL:		http://linux-diag.sourceforge.net/Sysdiag.html
 #BuildRequires:	sysfsutils-devel = 0.1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -32,6 +34,8 @@ informacji o urz±dzeniach z sysfs pod Linuksem 2.5+.
 
 %prep
 %setup -q -n %{name}-v%{fver}
+%patch0 -p1
+%patch1 -p1
 
 %build
 %configure
