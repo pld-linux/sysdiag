@@ -22,7 +22,7 @@ diff -burN sysdiag-v0_2_0.orig/tdb/tdbtool.c sysdiag-v0_2_0/tdb/tdbtool.c
 -  q | quit             : terminate
 -  \\n                   : repeat 'next' command
 -");
-+	printf(""
++	printf("\n"
 +"tdbtool: \n"
 +"  create    dbname     : create a database\n"
 +"  open      dbname     : open an existing database\n"
