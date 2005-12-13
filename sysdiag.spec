@@ -63,6 +63,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README docs/sysdiag.txt
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/sysdiag.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/sysdiag.conf
 %attr(755,root,root) %{_bindir}/sysdiag
 %{_mandir}/man1/%{name}.1*
