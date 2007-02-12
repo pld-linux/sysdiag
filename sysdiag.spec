@@ -1,5 +1,5 @@
 Summary:	Command line diagnostics
-Summary(pl):	Narzêdzie diagnostyczne dzia³aj±ce z linii poleceñ
+Summary(pl.UTF-8):   NarzÄ™dzie diagnostyczne dziaÅ‚ajÄ…ce z linii poleceÅ„
 Name:		sysdiag
 Version:	0.3.0
 %define	fver	%(echo %{version} | tr . _)
@@ -28,13 +28,13 @@ logs for the device. sysdiag makes use of libsysfs, which is a library
 that provides set of APIs to query device information from the sysfs
 undef Linux 2.5+.
 
-%description -l pl
-sysdiag to narzêdzie pozwalaj±ce u¿ytkownikowi na wykonanie
-diagnostyki urz±dzeñ obecnych w systemie. Pozwala tak¿e uzyskaæ listê
-wszystkich urz±dzeñ oraz wy¶wietliæ informacje z logów systemowych o
-zdarzeniach zwi±zanych z tym urz±dzeniem. sysdiag wykorzystuje
-libsysfs - bibliotekê dostarczaj±c± zbiór API do uzyskiwania
-informacji o urz±dzeniach z sysfs pod Linuksem 2.5+.
+%description -l pl.UTF-8
+sysdiag to narzÄ™dzie pozwalajÄ…ce uÅ¼ytkownikowi na wykonanie
+diagnostyki urzÄ…dzeÅ„ obecnych w systemie. Pozwala takÅ¼e uzyskaÄ‡ listÄ™
+wszystkich urzÄ…dzeÅ„ oraz wyÅ›wietliÄ‡ informacje z logÃ³w systemowych o
+zdarzeniach zwiÄ…zanych z tym urzÄ…dzeniem. sysdiag wykorzystuje
+libsysfs - bibliotekÄ™ dostarczajÄ…cÄ… zbiÃ³r API do uzyskiwania
+informacji o urzÄ…dzeniach z sysfs pod Linuksem 2.5+.
 
 %prep
 %setup -q -n %{name}-v%{fver}
