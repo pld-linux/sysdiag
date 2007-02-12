@@ -1,5 +1,5 @@
 Summary:	Command line diagnostics
-Summary(pl.UTF-8):   Narzędzie diagnostyczne działające z linii poleceń
+Summary(pl.UTF-8):	Narzędzie diagnostyczne działające z linii poleceń
 Name:		sysdiag
 Version:	0.3.0
 %define	fver	%(echo %{version} | tr . _)
