@@ -1,6 +1,27 @@
-diff -burN sysdiag-v0_3_0.orig/docs/sysdiag.1 sysdiag-v0_3_0/docs/sysdiag.1
---- sysdiag-v0_3_0.orig/docs/sysdiag.1	2004-03-04 22:30:56.554015408 +0100
-+++ sysdiag-v0_3_0/docs/sysdiag.1	2004-03-04 22:41:32.421348880 +0100
+--- sysdiag-v0_2_0.orig/src/sysdiag.h	2004-02-24 14:54:00.395408040 +0100
++++ sysdiag-v0_2_0/src/sysdiag.h	2004-02-24 15:03:51.725512200 +0100
+@@ -79,7 +79,7 @@
+ 
+ #define CMD_OPTIONS "B:b:c:diLlRr:psthxv?"
+ 
+-#define CONF_FILE "/usr/local/share/sysdiag.conf"
++#define CONF_FILE "/etc/sysdiag.conf"
+ 
+ TDB_CONTEXT *sysdiag_db;
+ 
+--- sysdiag-v0_2_0/src/sysdiag.conf.orig	2004-01-02 06:22:10.000000000 +0100
++++ sysdiag-v0_2_0/src/sysdiag.conf	2004-02-25 22:09:31.368282992 +0100
+@@ -10,7 +10,7 @@
+ 
+ EVLOGVIEW=/sbin/evlview -b -S "%time% %host% %facility% %severity% %event_type% %data%" --datefmt "%A %B %d %l:%M:%S %p"  | grep -wi <dev>
+ 
+-DB_FILE=/usr/local/share/sysdiag.tdb
++DB_FILE=/var/lib/misc/sysdiag.tdb
+ 
+ [net]
+ INQ=ethtool -i <dev>
+--- sysdiag-v0_3_0/docs/sysdiag.1~	2007-12-16 01:25:24.000000000 +0200
++++ sysdiag-v0_3_0/docs/sysdiag.1	2007-12-16 01:28:59.139630857 +0200
 @@ -54,11 +54,11 @@
  
  .TP
@@ -30,27 +51,3 @@ diff -burN sysdiag-v0_3_0.orig/docs/sysdiag.1 sysdiag-v0_3_0/docs/sysdiag.1
  .SH "DEPENDENCIES"
  
  .PP
-diff -burN sysdiag-v0_3_0.orig/src/sysdiag.conf sysdiag-v0_3_0/src/sysdiag.conf
---- sysdiag-v0_3_0.orig/src/sysdiag.conf	2004-03-04 22:30:56.553015560 +0100
-+++ sysdiag-v0_3_0/src/sysdiag.conf	2004-03-04 22:40:28.225108192 +0100
-@@ -10,7 +10,7 @@
- 
- EVLOGVIEW=/sbin/evlview -b -S "%time% %host% %facility% %severity% %event_type% %data%" --datefmt "%A %B %d %l:%M:%S %p"  | grep -wi <dev>
- 
--DB_FILE=/usr/local/share/sysdiag.tdb
-+DB_FILE=/var/lib/misc/sysdiag.tdb
- 
- [net]
- INQ=ethtool -i <dev>
-diff -burN sysdiag-v0_3_0.orig/src/sysdiag.h sysdiag-v0_3_0/src/sysdiag.h
---- sysdiag-v0_3_0.orig/src/sysdiag.h	2004-03-04 22:30:56.551015864 +0100
-+++ sysdiag-v0_3_0/src/sysdiag.h	2004-03-04 22:40:09.172004704 +0100
-@@ -79,7 +79,7 @@
- 
- #define CMD_OPTIONS "B:b:c:diLlRr:psthxv?"
- 
--#define CONF_FILE "/usr/local/share/sysdiag.conf"
-+#define CONF_FILE "/etc/sysdiag.conf"
- 
- TDB_CONTEXT *sysdiag_db;
- 

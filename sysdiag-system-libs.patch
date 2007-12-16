@@ -1,41 +1,27 @@
-diff -burN sysdiag-v0_3_0.orig/configure.ac sysdiag-v0_3_0/configure.ac
---- sysdiag-v0_3_0.orig/configure.ac	2004-03-04 22:30:56.560014496 +0100
-+++ sysdiag-v0_3_0/configure.ac	2004-03-04 22:33:43.860580944 +0100
-@@ -11,8 +11,6 @@
+--- sysdiag-v0_3_0/configure.ac	2004-02-25 17:14:28.000000000 +0200
++++ sysdiag-v0_3_0-patched/configure.ac	2007-12-16 01:32:30.560376443 +0200
+@@ -11,7 +11,6 @@
  AC_PROG_RANLIB
  
  AC_CHECK_LIB([sysfs], [sysfs_open_bus], , exit)
 -AC_CHECK_LIB([gdbm], [gdbm_open], , exit)
--
+ 
  
  AH_TEMPLATE([HAVE_EVLVIEW],[need to check if evlview is installed])
- AC_ARG_VAR(evl_view, 0)
-diff -burN sysdiag-v0_3_0.orig/Makefile.am sysdiag-v0_3_0/Makefile.am
---- sysdiag-v0_3_0.orig/Makefile.am	2004-03-04 22:30:56.562014192 +0100
-+++ sysdiag-v0_3_0/Makefile.am	2004-03-04 22:31:51.859607680 +0100
+--- sysdiag-v0_3_0/Makefile.am	2004-02-25 15:04:23.000000000 +0200
++++ sysdiag-v0_3_0-patched/Makefile.am	2007-12-16 01:32:12.982984201 +0200
 @@ -1,3 +1,3 @@
  # EXTRA_DIST = docs
 -SUBDIRS = tdb src test docs
 +SUBDIRS = src docs
  
-diff -burN sysdiag-v0_3_0.orig/src/Makefile.am sysdiag-v0_3_0/src/Makefile.am
---- sysdiag-v0_3_0.orig/src/Makefile.am	2004-03-04 22:30:56.552015712 +0100
-+++ sysdiag-v0_3_0/src/Makefile.am	2004-03-04 22:31:41.267217968 +0100
-@@ -5,4 +5,4 @@
+--- sysdiag-v0_3_0/src/Makefile.am	2004-02-25 15:05:42.000000000 +0200
++++ sysdiag-v0_3_0-patched/src/Makefile.am	2007-12-16 01:31:56.721696207 +0200
+@@ -4,5 +4,5 @@
+ sysdiag_SOURCES = sysdiag.c syslist.c sysparse.c syslog.c sysdiag.h sysdb.c
  data_DATA = $(conf_file)
  
- INCLUDES = -I../tdb
+-INCLUDES = -I../tdb
 -LDADD =-lsysfs ../tdb/libtdb.a
-+LDADD =-lsysfs -ltdb
-diff -burN sysdiag-v0_3_0.orig/src/sysdiag.h sysdiag-v0_3_0/src/sysdiag.h
---- sysdiag-v0_3_0.orig/src/sysdiag.h	2004-03-04 22:30:56.551015864 +0100
-+++ sysdiag-v0_3_0/src/sysdiag.h	2004-03-04 22:46:18.403872928 +0100
-@@ -36,7 +36,7 @@
- #include <fcntl.h>
- #include <dirent.h>
- #include <mntent.h>
--#include <sysfs/libsysfs.h>
-+#include <libsysfs.h>
- #include "tdb.h"
- //#include "spinlock.h"
-  
++INCLUDES =
++LDADD = -lsysfs -ltdb
