@@ -1,8 +1,8 @@
+%define	fver	%(echo %{version} | tr . _)
 Summary:	Command line diagnostics
 Summary(pl.UTF-8):	Narzędzie diagnostyczne działające z linii poleceń
 Name:		sysdiag
 Version:	0.3.0
-%define	fver	%(echo %{version} | tr . _)
 Release:	0.1
 License:	GPL
 Group:		Applications/System
@@ -17,8 +17,6 @@ BuildRequires:	automake
 BuildRequires:	sysfsutils-devel >= 0.4.0
 BuildRequires:	tdb-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_datadir	%{_sysconfdir}
 
 %description
 sysdiag is a utility that enables the user to run diagnotics on
@@ -43,11 +41,13 @@ informacji o urządzeniach z sysfs pod Linuksem 2.5+.
 %patch2 -p1
 
 %build
+export CPPFLAGS=-I/usr/include/sysfs
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	--datadir=%{_sysconfdir}
 
 %{__make}
 
